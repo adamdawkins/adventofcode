@@ -5,7 +5,7 @@ import Day1
 import Test.Hspec
 import Text.Printf (printf)
 
-testCalculateFuel :: Int -> Int -> Spec
+testCalculateFuel :: Integer -> Integer -> Spec
 testCalculateFuel mass fuel =
   it (printf "should return the mass divided by 3, rounded down and subtracted 2: %d -> %d \n" mass fuel) $
     calculateFuel mass `shouldBe` fuel
