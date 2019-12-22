@@ -1,7 +1,15 @@
 module Day1 where
 
 calculateFuel :: Integer -> Integer
-calculateFuel mass = (floor( fromIntegral mass / 3)) - 2
+calculateFuel mass = calculateFuel' mass 0
+
+fuelForMass :: Integer -> Integer
+fuelForMass mass = (floor $ fromIntegral mass / 3) - 2
+
+calculateFuel' :: Integer -> Integer -> Integer
+calculateFuel' mass total
+  | fuelForMass mass < 0  = total
+  | otherwise = calculateFuel' (fuelForMass mass) (total + fuelForMass mass)
 
 values = [
   88093,
