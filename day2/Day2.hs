@@ -50,10 +50,10 @@ intCodeProgram cursor program
     newProgram = compute program cursor
 
 answer1 :: Int
-answer1 = head $ intCodeProgram 0 inputList
+answer1 = head $ intCodeProgram 0 a1InputList
 
-inputList :: [Int]
-inputList = changeElement 2 2 $ changeElement 1 12 puzzleInput
+a1InputList :: [Int]
+a1InputList = initProgram 2 12 puzzleInput
 
 pairs :: Eq a => [a] -> [(a, a)]
 pairs []     = []
@@ -62,9 +62,13 @@ pairs (x:xs) = nub $ concatMap (\y -> [(x,y), (y,x)]) xs ++ pairs xs
 output :: (Int, Int) -> [Int] -> Int
 output (noun, verb) program =
   let
-    newProgram = changeElement 2 verb $ changeElement 1 noun program
+    newProgram = initProgram noun verb program
   in
     head $ intCodeProgram 0 newProgram
+
+initProgram :: Int -> Int -> [Int] -> [Int]
+initProgram noun verb program = changeElement 2 verb $ changeElement 1 noun program
+
 
 findNounVerb :: [(Int, Int)] -> [Int] -> (Int, Int)
 findNounVerb _ [] = (-9999, -9999)
@@ -78,4 +82,4 @@ answer2 =
   let
     (noun, verb) = findNounVerb (pairs [0..99]) puzzleInput
   in
-  noun * 100 + verb
+    noun * 100 + verb
